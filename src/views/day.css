@@ -1,0 +1,13 @@
+.day {
+  display: inline-block;
+  margin: 0.1vw;
+  padding: 0.1vw 0.7vw;
+  line-height: 0;
+  grid-column: span 1;
+}
+.day .event-modifiers {
+  display: none;
+}
+.eventful {
+  background-color: rgba(220,120,0,0.4);
+}

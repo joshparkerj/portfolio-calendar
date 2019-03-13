@@ -1,0 +1,33 @@
+.year {
+  margin: 1vw;
+  font-size: 1.5vw;
+}
+
+.year .calendar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.year .month {
+  margin: 0.5vw;
+  border: solid black;
+  padding: 0.5vw;
+}
+
+.year .day .display-events {
+  visibility: hidden;
+  width: 20vw;
+  background-color: rgb(120, 220, 0);
+  color: rgba(0,0,0,0.8);
+  text-align: center;
+  padding: 5px 0;
+  border: 5px solid black;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  margin-left: -10vw;
+}
+
+.year .eventful:hover .display-events {
+    visibility: visible;
+}

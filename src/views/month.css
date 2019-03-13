@@ -1,0 +1,8 @@
+.month {
+  display: inline-block;
+  grid-column: span 1;
+}
+
+.month h4 {
+  text-align: center;
+}

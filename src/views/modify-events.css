@@ -1,0 +1,9 @@
+.modify-events {
+  border: 1px solid rgba(70,70,70,0.5);
+  border-radius: 28px;
+  box-shadow: 1px 1px 3px rgba(70,70,140,0.4);
+}
+
+.modify-events div {
+  margin: 28px;
+}
