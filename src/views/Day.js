@@ -3,9 +3,9 @@ import './day.css';
 import DisplayEvent from './DisplayEvent';
 
 function Day(props){
-  const currentEvents = props.events.filter(e => {
+  const currentEvents = props.events.length ? props.events.filter(e => {
     return e.date === props.date.toDateString();
-  })
+  }) : [];
   const el = currentEvents.length;
   return (
     <div className={`day ${el > 0 ? 'eventful' : ''}`}>

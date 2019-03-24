@@ -55,4 +55,4 @@ app.get('*', (req,res) => {
   res.sendFile(__dirname + '/build/index.html');
 })
 
-app.listen(process.env.PORT || 8080);
+app.listen(3002);

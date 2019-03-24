@@ -5,48 +5,6 @@ import DisplayEvent from './DisplayEvent';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-const handleChange = event => {
-  this.setState({[event.target.name]: event.target.value});
-}
-
-const handleLoad = () => {
-  const d = new Date(this.state.date);
-  const correctedDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
-  const cd = new Date(correctedDate);
-  readEvent()
-    .then(res => {
-      return res.filter(e => e.date === cd.toDateString());
-    })
-    .then(res => {
-      if (res.length < 1){
-        toast.warn('we have no events for that date');
-      }
-      this.setState({currentEvents: res});
-    })
-    .catch(err => {
-      console.error(err);
-    })
-}
-
-const renderEvents = () => {
-  try {
-    return this.state.currentEvents.map((e,i) => {
-      return (
-        <DisplayEvent
-          event={e}
-          key={i}
-          handleDelete={this.handleDelete}
-        />
-      )
-    })}
-  catch(e) {
-    console.log('no events data available');
-    console.error(e);
-    toast.error('couldn\'t get events data');
-    return '';
-  }
-}
-
 class ModifyEvents extends Component {
   constructor(){
     super();
@@ -54,13 +12,51 @@ class ModifyEvents extends Component {
       currentEvents: [],
       date: 0,
     }
-    this.handleDelete = this.handleDelete.bind(this);
-    this.renderEvents = renderEvents;
-    this.handleLoad = handleLoad;
-    this.handleChange = handleChange;
   }
 
-  handleDelete(id){
+  handleChange = event => {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
+  handleLoad = () => {
+    const d = new Date(this.state.date);
+    const correctedDate = d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
+    const cd = new Date(correctedDate);
+    readEvent()
+      .then(res => {
+        return res.filter(e => e.date === cd.toDateString());
+      })
+      .then(res => {
+        if (res.length < 1){
+          toast.warn('we have no events for that date');
+        }
+        this.setState({currentEvents: res});
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
+
+  renderEvents = () => {
+    try {
+      return this.state.currentEvents.map((e,i) => {
+        return (
+          <DisplayEvent
+            event={e}
+            key={i}
+            handleDelete={this.handleDelete}
+          />
+        )
+      })}
+    catch(e) {
+      console.log('no events data available');
+      console.error(e);
+      toast.error('couldn\'t get events data');
+      return '';
+    }
+  }
+
+  handleDelete = id => {
     deleteEvent(id)
       .then(res => {
         if(res === 200){
