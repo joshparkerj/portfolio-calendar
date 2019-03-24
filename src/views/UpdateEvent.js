@@ -4,27 +4,6 @@ import { updateEvent, eventById } from '../data/api.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-const handleChange = event => {
-  this.setState({[event.target.name]: event.target.value});
-}
-
-const handleUpdate = () => {
-  const date = new Date(this.state.date);
-  date.setDate(date.getDate()+1);
-  const formattedDate = date.toDateString();
-  updateEvent({
-    name: this.state.name,
-    date: formattedDate,
-    time: this.state.time
-  },this.state.id)
-    .then(res => {
-      toast.success('updated!');
-    })
-    .catch(err => {
-      console.error(err);
-    })
-}
-
 class UpdateEvent extends Component {
   constructor(){
     super();
@@ -37,8 +16,6 @@ class UpdateEvent extends Component {
       datewas: 0,
       timewas: 0
     }
-    this.handleChange = handleChange;
-    this.handleUpdate = handleUpdate;
   }
 
   componentDidMount(){
@@ -55,6 +32,27 @@ class UpdateEvent extends Component {
       .catch(err => {
         console.error(err);
         return err;
+      })
+  }
+
+  handleChange = event => {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
+  handleUpdate = () => {
+    const date = new Date(this.state.date);
+    date.setDate(date.getDate()+1);
+    const formattedDate = date.toDateString();
+    updateEvent({
+      name: this.state.name,
+      date: formattedDate,
+      time: this.state.time
+    },this.state.id)
+      .then(res => {
+        toast.success('updated!');
+      })
+      .catch(err => {
+        console.error(err);
       })
   }
 
